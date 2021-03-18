@@ -1,42 +1,74 @@
-<h1>Register Please!</h1>
+<div [hidden]="submitted">
+
 <div class="container">
+    <h1>Register Please!</h1>
     <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Registration
-            </div>
-            <div class="panel-body">
-                <form #login="ngForm" (ngSubmit)="submit(login)" id="registration">
-                    <div class="form-group">
+        
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Registration Form
+                </div>
+                <div class="panel-body">
 
-                        <input #name="ngModel" required minlength="2" maxlength="15" type="text" name="firstname"
-                            class="form-control" ngModel placeholder="First Name">
-                        <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
-                            <p *ngIf="name.errors">First Name required!!</p>
+                    <form #login="ngForm" (ngSubmit)="submit(login)" id="registration">
+                        <div class="form-group">
+                            <input #fname="ngModel" required minlength="2" maxlength="15" type="text" name="firstname"
+                                class="form-control" ngModel placeholder="First Name">
+                            <div *ngIf="fname.touched && fname.invalid" class="alert alert-danger">
+                                <p *ngIf="fname.errors">First Name required!!</p>
+                            </div>
                             <!-- <p *ngIf="name.errors.minlength">Enter full name.</p> -->
-                          
+                            <!-- <P>{{name.value}}</P> -->
                         </div>
-                        
 
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <input type="text" name="lastname" class="form-control" ngModel placeholder="Last Name">
-                    </div>
-                    <br>
-                    <div class="form-group">
+                        <br>
 
-                        <input type="text" name="email" class="form-control" ngModel placeholder="Email ID">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <input type="text" name="password" class="form-control" ngModel placeholder="Password">
-                    </div>
-                    <br>
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                        <div class="form-group">
+                            <input type="text" #lname="ngModel" required minlength="2" name="lastname"
+                                class="form-control" ngModel placeholder="Last Name">
+                            <div *ngIf="lname.touched && lname.invalid" class="alert alert-danger">
+                                <p *ngIf="lname.errors">Last Name required!!</p>
+                            </div>
+                        </div>
 
-                </form>
+                        <br>
+
+                        <div class="form-group">
+                            <input #email="ngModel" required minlength="2" type="email" name="email"
+                                class="form-control" ngModel placeholder="Email ID">
+                            <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+                                <p *ngIf="email.errors">Email ID required!!</p>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-group">
+                            <input #password="ngModel" required minlength="2" type="password" name="password"
+                                class="form-control" ngModel placeholder="Password">
+                            <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+                                <p *ngIf="password.errors">Password required!!</p>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <button class="btn btn-primary" type="submit" [disabled]="!login.form.valid">Submit</button>
+
+                        <button type="reset" class="btn btn-primary" (click)="myFunction()">Reset</button>
+
+                    </form>
+
+                </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+        <div class="col-xs-3">Name</div>
+        <div class="col-xs-9">{{ fname.value }}</div>
     </div>
 </div>

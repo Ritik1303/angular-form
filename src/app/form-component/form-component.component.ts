@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponentComponent {
 
+  submitted = false;
   submit(login: any){
     console.log("Form Submitted",login)
+    this.submitted = true;
+  }
+  myFunction(){
+    this.submitted=false;
   }
 
 }

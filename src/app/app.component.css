@@ -4,3 +4,17 @@
     margin-right: auto;
   
   }
+  div{
+    background-color: antiquewhite;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+  h1{
+    float:right;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
