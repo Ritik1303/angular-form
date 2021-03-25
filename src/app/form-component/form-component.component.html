@@ -1,19 +1,19 @@
 <div [hidden]="submitted">
 
-<div class="container">
-    <h1>Register Please!</h1>
-    <div class="col-md-12">
-        
+    <div class="container">
+        <h1>Hello {{fname.value}} !</h1>
+        <div class="col-md-12">
+            <!-- {{userModel|json}} -->
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     Registration Form
                 </div>
                 <div class="panel-body">
 
-                    <form #login="ngForm" (ngSubmit)="submit(login)" id="registration">
+                    <form #login="ngForm" (ngSubmit)="submit(login)" id="registration" method="POST">
                         <div class="form-group">
                             <input #fname="ngModel" required minlength="2" maxlength="15" type="text" name="firstname"
-                                class="form-control" ngModel placeholder="First Name">
+                                class="form-control" [(ngModel)]="userModel.fname" placeholder="First Name">
                             <div *ngIf="fname.touched && fname.invalid" class="alert alert-danger">
                                 <p *ngIf="fname.errors">First Name required!!</p>
                             </div>
@@ -25,7 +25,7 @@
 
                         <div class="form-group">
                             <input type="text" #lname="ngModel" required minlength="2" name="lastname"
-                                class="form-control" ngModel placeholder="Last Name">
+                                class="form-control" [(ngModel)]="userModel.lname" placeholder="Last Name">
                             <div *ngIf="lname.touched && lname.invalid" class="alert alert-danger">
                                 <p *ngIf="lname.errors">Last Name required!!</p>
                             </div>
@@ -35,7 +35,7 @@
 
                         <div class="form-group">
                             <input #email="ngModel" required minlength="2" type="email" name="email"
-                                class="form-control" ngModel placeholder="Email ID">
+                                class="form-control" [(ngModel)]="userModel.email" placeholder="Email ID">
                             <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
                                 <p *ngIf="email.errors">Email ID required!!</p>
                             </div>
@@ -45,15 +45,102 @@
 
                         <div class="form-group">
                             <input #password="ngModel" required minlength="2" type="password" name="password"
-                                class="form-control" ngModel placeholder="Password">
+                                class="form-control" [(ngModel)]="userModel.password" placeholder="Password">
                             <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
                                 <p *ngIf="password.errors">Password required!!</p>
                             </div>
                         </div>
-
                         <br>
 
-                        <button class="btn btn-primary" type="submit" [disabled]="!login.form.valid">Submit</button>
+                        <div class="form-group">
+                            <input #conpassword="ngModel" required minlength="2" type="password" name="conpassword"
+                                class="form-control" [(ngModel)]="userModel.conpassword" placeholder="Confirm Password">
+                            <div *ngIf="conpassword.touched && conpassword.invalid" class="alert alert-danger">
+                                <p *ngIf="password.errors">Password required!!</p>
+                            </div>
+                            <div *ngIf="conpassword.value!=password.value" class="alert alert-danger">
+                                <p>Passwords do not match.</p>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="form-group">
+                            <input #mobile="ngModel" required minlength="2" type="tel" name="mobile"
+                                [pattern]="'[789][0-9]{9}'" class="form-control" [(ngModel)]="userModel.mobile" placeholder="Mobile Number">
+                            <div *ngIf="mobile.touched && mobile.invalid" class="alert alert-danger">
+                                <p *ngIf="mobile.errors">Mobile No. required!!</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="gen" class="form-group" [formGroup]="form">
+                            <label for="gender">Gender</label>
+                            <br>
+                            <div class="form-check form-check-inline"  >
+
+                                <input  class="form-check-input" type="radio" name="gender" id="Male"
+                                    value="male" formControlName="gender" [(ngModel)]="userModel.gender" checked>
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="Female"
+                                    formControlName="gender" [(ngModel)]="userModel.gender">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                        </div>
+                        <br>
+
+                        <br>
+                        <div class="form-group">
+                            <legend style="text-align: left;">Address</legend>
+                            <select class="form-select form-control" aria-label="Default select example" [(ngModel)]="userModel.country" >
+                                <option value="" disabled>Select Country</option>
+                                <option selected value="India">India</option>
+                                <option value="China">China</option>
+                                <option value="Germany">Germany</option>
+                              </select>
+                              <br>
+                              <input #city="ngModel" required minlength="2" type="text" name="city"
+                                class="form-control" [(ngModel)]="userModel.city" placeholder="City">
+                            <div *ngIf="city.touched && city.invalid" class="alert alert-danger">
+                                <p *ngIf="city.errors">City required!!</p>
+                            </div>
+                            <br>
+                            <input #address="ngModel" required minlength="2" type="address" name="address"
+                                class="form-control" [(ngModel)]="userModel.address" placeholder="Address">
+                            <div *ngIf="address.touched && address.invalid" class="alert alert-danger">
+                                <p *ngIf="address.errors">Address required!!</p>
+                            </div>
+                              
+                        </div>
+
+                        <br>
+                        <form [formGroup]="mathFormGroup" #lo="ngForm">
+                            <!-- <div class="form-group"> -->
+                                <p>
+                                <input type="number" class="form-control" formControlName="firstNumber" readonly
+                                    id="firstNumber">
+<!-- 
+                            </div> -->
+                            <input readonly value="+" class="form-control" id="sign">
+                            <!-- <div class="form-group"> -->
+
+                                <input type="number" class="form-control" formControlName="secondNumber" readonly
+                                    id="secondNumber">
+</p>
+                            <!-- </div> -->
+                            <div class="form-group">
+                                <input placeholder="Answer" type="number" class="form-control" formControlName="answer" id="answer">
+
+                            </div>
+                        </form>
+                        <!-- <button type="submit" [disabled]="!mathFormGroup.valid" class="btn btn-primary">Submit</button> -->
+                        <!-- [formGroup]="mathFormGroup" -->
+                        <!-- [disabled]="!mathFormGroup.valid" -->
+                        <br>
+
+
+                        <button class="btn btn-primary" type="submit" value="submit"
+                            [disabled]="!login.form.valid && !mathFormGroup.valid">Submit</button>
 
                         <button type="reset" class="btn btn-primary" (click)="myFunction()">Reset</button>
 
@@ -66,9 +153,23 @@
 </div>
 
 <div [hidden]="!submitted">
-    <h2>You submitted the following:</h2>
+    <h2>Your Details:</h2>
+    <br>
     <div class="row">
-        <div class="col-xs-3">Name</div>
-        <div class="col-xs-9">{{ fname.value }}</div>
+        <div class="col-xs-12" id="disp">
+            <span>Name :</span>
+            <span>{{ fname.value }} {{ lname.value }}</span>
+            <br>
+            <br>
+            <span>Email ID: </span>
+            <span>{{email.value}}</span>
+            <br>
+            <br>
+            <span>Mobile No.: </span>
+            <span>{{mobile.value}}</span>
+            <br>
+            <br>
+            <span>Sex:</span>
+            <span>{{(userModel.gender)}}</span>
+        </div>
     </div>
-</div>

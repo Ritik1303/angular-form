@@ -3,3 +3,66 @@
     <h1>Company Name</h1>
 </div>
 <app-form-component></app-form-component>
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form [formGroup]="mathFormGroup">
+                <div class="form-group">
+                    
+                    <input type="number" class="form-control" formControlName="firstNumber" readonly
+                        id="firstNumber">
+
+                </div>
+                +
+                <div class="form-group">
+                   
+                    <input type="number" class="form-control"  formControlName="secondNumber" readonly
+                        id="secondNumber">
+
+                </div>
+                <div class="form-group">
+                    <label for="answer">Answer</label>
+                    <input type="number" class="form-control" formControlName="answer" id="answer">
+
+                </div>
+
+
+                <button type="submit" [disabled]="!mathFormGroup.valid" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <pre>
+    {{mathFormGroup.value|json}}
+   {{mathFormGroup.valid|json}}
+    </pre>
+</div> -->
+<!-- mathFormGroup!: FormGroup;
+  constructor() {
+    this.initForm();
+  }
+  randomNumber = (min = 1, max = 10) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+  initForm() {
+    this.mathFormGroup = new FormGroup(
+      {
+        firstNumber: new FormControl(this.randomNumber(), [
+          Validators.required
+        ]),
+        secondNumber: new FormControl(this.randomNumber(), [
+          Validators.required
+        ]),
+        answer: new FormControl("")
+      },
+      [this.answerValidator]
+    );
+  }
+  answerValidator(form: AbstractControl) {
+    console.log(form.value);
+    const { firstNumber, secondNumber, answer } = form.value;
+    if (+answer === parseInt(firstNumber) + parseInt(secondNumber)) {
+      return null;
+    }
+    return { math: true };
+  }
+} -->
